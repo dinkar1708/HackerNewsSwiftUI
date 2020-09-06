@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  HackerNewsSwiftUI
+
+  Created by Dinakar Prasad Maurya on 2020/09/06.
+  Copyright © 2020 Dinakar Prasad Maurya. All rights reserved.
+*/
+
+"AppName" = "Hacker News";
