@@ -1,16 +1,16 @@
 //
-//  WebView.swift
-//  H4X0R News
+//  NewsDetailsView.swift
+//  HackerNewsSwiftUI
 //
-//  Created by Angela Yu on 08/09/2019.
-//  Copyright © 2019 Angela Yu. All rights reserved.
+//  Created by Arnav Maurya on 2024/02/04.
+//  Copyright © 2024 Dinakar Prasad Maurya. All rights reserved.
 //
 
 import Foundation
 import WebKit
 import SwiftUI
 
-struct WebView: UIViewRepresentable {
+struct NewsDetailsView: UIViewRepresentable {
     
     let urlString: String?
     
@@ -31,6 +31,6 @@ struct WebView: UIViewRepresentable {
 
 struct WebView_Previews: PreviewProvider {
     static var previews: some View {
-        WebView(urlString: "www.google.com")
+        NewsDetailsView(urlString: "www.google.com")
     }
 }

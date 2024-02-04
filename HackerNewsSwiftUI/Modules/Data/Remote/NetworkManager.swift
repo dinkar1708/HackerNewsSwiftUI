@@ -6,6 +6,7 @@
 //  Copyright © 2020 Dinakar Prasad Maurya. All rights reserved.
 //
 
+// TODO write common api layer code
 import Foundation
 class NetworkManager :ObservableObject {
     

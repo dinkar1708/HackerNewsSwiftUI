@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  NewsListView.swift
 //  HackerNewsSwiftUI
 //
 //  Created by Dinakar Prasad Maurya on 2020/09/04.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct NewsListView: View {
     @ObservedObject var networkManger = NetworkManager()
     
     var body: some View {
@@ -16,7 +16,7 @@ struct ContentView: View {
             
             List(networkManger.posts) { post in
                 
-                NavigationLink(destination: WebView(urlString: post.url)) {
+                NavigationLink(destination: NewsDetailsView(urlString: post.url)) {
                     HStack{
                         Text(String(post.points)).background(Color.gray).padding()
                         Text(post.title)
@@ -35,6 +35,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NewsListView()
     }
 }
