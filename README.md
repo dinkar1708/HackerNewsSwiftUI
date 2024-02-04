@@ -3,6 +3,7 @@
  This hacker news app shows api call and display in list from hacker news api
  swift ui is smart to use same code for iphone, ipad and mac os applications.
  
+ # ios minimum verson 14
 Iphone ui
 
 <img width="510" alt="Screen Shot 2020-09-06 at 14 17 13" src="https://user-images.githubusercontent.com/14831652/92318747-c7970c80-f04b-11ea-9614-b4f1d194bea5.png">

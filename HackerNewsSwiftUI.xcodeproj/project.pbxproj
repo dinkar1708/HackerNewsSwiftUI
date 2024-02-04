@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47826A1B2B6FBBAA0043DEC5 /* SharedWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47826A1A2B6FBBAA0043DEC5 /* SharedWebView.swift */; };
 		7F5051C12503EDBD00157628 /* NewsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5051C02503EDBD00157628 /* NewsDetailsView.swift */; };
 		7F5051D12503FCFF00157628 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F5051D32503FCFF00157628 /* Localizable.strings */; };
 		7F94620825021AD2002DFE55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F94620725021AD2002DFE55 /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47826A1A2B6FBBAA0043DEC5 /* SharedWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedWebView.swift; sourceTree = "<group>"; };
 		7F5051C02503EDBD00157628 /* NewsDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailsView.swift; sourceTree = "<group>"; };
 		7F5051CA2503F5EC00157628 /* HackerNewsSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HackerNewsSwiftUI.entitlements; sourceTree = "<group>"; };
 		7F5051D22503FCFF00157628 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		47826A112B6FB8F30043DEC5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				47826A192B6FBB990043DEC5 /* Shared */,
 				7F5051BB2503E9DF00157628 /* Feature */,
 			);
 			path = UI;
@@ -104,6 +107,14 @@
 				7F94620925021AD2002DFE55 /* SceneDelegate.swift */,
 			);
 			path = AppConfig;
+			sourceTree = "<group>";
+		};
+		47826A192B6FBB990043DEC5 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				47826A1A2B6FBBAA0043DEC5 /* SharedWebView.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		7F5051BB2503E9DF00157628 /* Feature */ = {
@@ -196,8 +207,9 @@
 		7F9461FC25021AD2002DFE55 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Dinakar Prasad Maurya";
 				TargetAttributes = {
 					7F94620325021AD2002DFE55 = {
@@ -247,6 +259,7 @@
 				7F94620825021AD2002DFE55 /* AppDelegate.swift in Sources */,
 				7F94620A25021AD2002DFE55 /* SceneDelegate.swift in Sources */,
 				7F94620C25021AD2002DFE55 /* NewListView.swift in Sources */,
+				47826A1B2B6FBBAA0043DEC5 /* SharedWebView.swift in Sources */,
 				7F94621F25022A67002DFE55 /* Results.swift in Sources */,
 				7F5051C12503EDBD00157628 /* NewsDetailsView.swift in Sources */,
 			);
@@ -302,6 +315,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -312,6 +326,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -326,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -363,6 +378,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -373,6 +389,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -381,7 +398,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
