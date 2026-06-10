@@ -4,22 +4,19 @@
  swift ui is smart to use same code for iphone, ipad and mac os applications.
  
  # ios minimum verson 14
-Iphone ui
 
-<img width="510" alt="Screen Shot 2020-09-06 at 14 17 13" src="https://user-images.githubusercontent.com/14831652/92318747-c7970c80-f04b-11ea-9614-b4f1d194bea5.png">
+# Screens
 
-<img width="516" alt="Screen Shot 2020-09-06 at 14 17 20" src="https://user-images.githubusercontent.com/14831652/92318745-c239c200-f04b-11ea-910a-f41fa33daf49.png">
+<img width="300" height="600" alt="Simulator Screenshot - iPhone 17e - 2026-06-10 at 13 28 40" src="https://github.com/user-attachments/assets/c9405424-324e-437f-a342-5972db6fdc7c" />
 
-<hr>
+<img width="300" height="600" alt="Simulator Screenshot - iPhone 17e - 2026-06-10 at 13 28 43" src="https://github.com/user-attachments/assets/68cd1960-8166-4722-880b-6d15afbae29b" />
 
- Ipad ui
- 
-<img width="1671" alt="Screen Shot 2020-09-06 at 14 16 28" src="https://user-images.githubusercontent.com/14831652/92318749-c960d000-f04b-11ea-9e04-e709754b2775.png">
- 
-<img width="680" alt="Screen Shot 2020-09-06 at 14 21 23" src="https://user-images.githubusercontent.com/14831652/92318792-45f3ae80-f04c-11ea-82ef-b14b658d603d.png">
+<img width="300" height="600" alt="Simulator Screenshot - iPhone 17e - 2026-06-10 at 13 28 59" src="https://github.com/user-attachments/assets/8ac8d213-e301-4f02-bf75-ea35af364661" />
 
-<hr>
+<img width="300" height="600" alt="Simulator Screenshot - iPhone 17e - 2026-06-10 at 13 29 04" src="https://github.com/user-attachments/assets/03711f12-0b19-4255-86b3-815c50613bce" />
 
- Mac os ui
- 
-<img width="1667" alt="Screen Shot 2020-09-06 at 14 15 49" src="https://user-images.githubusercontent.com/14831652/92318816-a125a100-f04c-11ea-8d56-87c534604b9b.png">
+<img width="300" height="600" alt="Simulator Screenshot - iPhone 17e - 2026-06-10 at 13 29 14" src="https://github.com/user-attachments/assets/467958a0-062f-4250-88d2-09bcbb692961" />
+
+
+<img width="300" height="600" alt="Simulator Screenshot - iPhone 17e - 2026-06-10 at 13 29 08" src="https://github.com/user-attachments/assets/b1048ea9-2cb8-4565-915c-b90a0ae6994a" />
+<img width="300" height="600" alt="Simulator Screenshot - iPhone 17e - 2026-06-10 at 13 29 11" src="https://github.com/user-attachments/assets/350fa746-89cb-4019-8a1d-177f8bb5a05d" />
