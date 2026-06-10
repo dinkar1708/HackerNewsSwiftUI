@@ -1,14 +1,13 @@
 //
-//  NewsListView.swift
+//  NewsListViewModern.swift
 //  HackerNewsSwiftUI
 //
-//  Created by Dinakar Prasad Maurya on 2020/09/04.
-//  Copyright © 2020 Dinakar Prasad Maurya. All rights reserved.
+//  Modern design with improved UI/UX
 //
 
 import SwiftUI
 
-struct NewsListView: View {
+struct NewsListViewModern: View {
     @ObservedObject var networkManager = NetworkManager()
     @State private var isLoading = true
 
@@ -22,6 +21,7 @@ struct NewsListView: View {
                     VStack(spacing: 20) {
                         ProgressView()
                             .scaleEffect(1.5)
+                            .tint(AppColors.primary)
                         Text("Loading Hacker News...")
                             .font(.system(size: 16))
                             .foregroundColor(AppColors.textSecondary)
@@ -56,6 +56,9 @@ struct NewsListView: View {
                         }
                         .padding(16)
                     }
+                    .refreshable {
+                        await refreshNews()
+                    }
                 }
             }
             .navigationTitle("Hacker News")
@@ -73,10 +76,15 @@ struct NewsListView: View {
             isLoading = false
         }
     }
+
+    private func refreshNews() async {
+        networkManager.fetchdata()
+        try? await Task.sleep(nanoseconds: 500_000_000)
+    }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct NewsListViewModern_Previews: PreviewProvider {
     static var previews: some View {
-        NewsListView()
+        NewsListViewModern()
     }
 }
