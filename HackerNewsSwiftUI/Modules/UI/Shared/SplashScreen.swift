@@ -66,14 +66,16 @@ struct SplashScreen: View {
 
 struct MainAppWithSplash: View {
     @State private var showSplash = true
+    @StateObject private var themeManager = ThemeManager.shared
 
     var body: some View {
-        ZStack {
+        let _ = themeManager.isDarkMode // Force observation
+        return ZStack {
             if showSplash {
                 SplashScreen()
                     .transition(.opacity)
             } else {
-                NewsListView()
+                MainTabView()
                     .transition(.opacity)
             }
         }
@@ -84,6 +86,7 @@ struct MainAppWithSplash: View {
                 }
             }
         }
+        .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
     }
 }
 

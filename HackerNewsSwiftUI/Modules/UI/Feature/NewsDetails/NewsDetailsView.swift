@@ -12,9 +12,11 @@ import SwiftUI
 struct NewsDetailsView: View {
     let urlString: String?
     @State private var isLoading = true
+    @StateObject private var themeManager = ThemeManager.shared
 
     var body: some View {
-        ZStack {
+        let _ = themeManager.isDarkMode // Force observation
+        return ZStack {
             AppColors.background.ignoresSafeArea()
 
             if let urlString = urlString, let url = URL(string: urlString) {

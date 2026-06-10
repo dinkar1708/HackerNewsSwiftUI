@@ -10,6 +10,171 @@ import Foundation
 import WebKit
 import SwiftUI
 
+// MARK: - Theme Manager
+class ThemeManager: ObservableObject {
+    static let shared = ThemeManager()
+
+    @Published var isDarkMode: Bool {
+        didSet {
+            UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
+        }
+    }
+
+    private init() {
+        self.isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+    }
+
+    var currentTheme: Theme {
+        isDarkMode ? .dark : .light
+    }
+}
+
+// MARK: - Bookmark Manager
+class BookmarkManager: ObservableObject {
+    static let shared = BookmarkManager()
+
+    @Published var bookmarkedPosts: [Post] = []
+    private let bookmarksKey = "bookmarkedPosts"
+
+    private init() {
+        loadBookmarks()
+    }
+
+    func isBookmarked(_ post: Post) -> Bool {
+        bookmarkedPosts.contains(where: { $0.objectID == post.objectID })
+    }
+
+    func toggleBookmark(_ post: Post) {
+        if let index = bookmarkedPosts.firstIndex(where: { $0.objectID == post.objectID }) {
+            bookmarkedPosts.remove(at: index)
+        } else {
+            bookmarkedPosts.insert(post, at: 0)
+        }
+        saveBookmarks()
+    }
+
+    private func saveBookmarks() {
+        if let encoded = try? JSONEncoder().encode(bookmarkedPosts) {
+            UserDefaults.standard.set(encoded, forKey: bookmarksKey)
+        }
+    }
+
+    private func loadBookmarks() {
+        if let data = UserDefaults.standard.data(forKey: bookmarksKey),
+           let decoded = try? JSONDecoder().decode([Post].self, from: data) {
+            bookmarkedPosts = decoded
+        }
+    }
+}
+
+// MARK: - Theme
+struct Theme {
+    let primary: Color
+    let secondary: Color
+    let accent: Color
+    let background: Color
+    let cardBackground: Color
+    let textPrimary: Color
+    let textSecondary: Color
+    let textLight: Color
+    let success: Color
+    let warning: Color
+    let error: Color
+    let info: Color
+    let pointsLow: Color
+    let pointsMedium: Color
+    let pointsHigh: Color
+
+    static let light = Theme(
+        primary: Color(hex: "FF6600"),
+        secondary: Color(hex: "F6F6EF"),
+        accent: Color(hex: "00D9FF"),
+        background: Color(hex: "F8F9FA"),
+        cardBackground: Color.white,
+        textPrimary: Color(hex: "2D3436"),
+        textSecondary: Color(hex: "636E72"),
+        textLight: Color(hex: "B2BEC3"),
+        success: Color(hex: "00B894"),
+        warning: Color(hex: "FDCB6E"),
+        error: Color(hex: "FF7675"),
+        info: Color(hex: "74B9FF"),
+        pointsLow: Color(hex: "95A5A6"),
+        pointsMedium: Color(hex: "FF6600"),
+        pointsHigh: Color(hex: "E74C3C")
+    )
+
+    static let dark = Theme(
+        primary: Color(hex: "FF6600"),
+        secondary: Color(hex: "1A1A1A"),
+        accent: Color(hex: "00D9FF"),
+        background: Color(hex: "121212"),
+        cardBackground: Color(hex: "1E1E1E"),
+        textPrimary: Color(hex: "FFFFFF"),
+        textSecondary: Color(hex: "B0B0B0"),
+        textLight: Color(hex: "6E6E6E"),
+        success: Color(hex: "00B894"),
+        warning: Color(hex: "FDCB6E"),
+        error: Color(hex: "FF7675"),
+        info: Color(hex: "74B9FF"),
+        pointsLow: Color(hex: "95A5A6"),
+        pointsMedium: Color(hex: "FF6600"),
+        pointsHigh: Color(hex: "E74C3C")
+    )
+}
+
+// MARK: - Dynamic App Colors
+struct AppColorsProvider {
+    static func colors(for theme: Theme) -> AppColorsType {
+        AppColorsType(
+            primary: theme.primary,
+            secondary: theme.secondary,
+            accent: theme.accent,
+            background: theme.background,
+            cardBackground: theme.cardBackground,
+            textPrimary: theme.textPrimary,
+            textSecondary: theme.textSecondary,
+            textLight: theme.textLight,
+            success: theme.success,
+            warning: theme.warning,
+            error: theme.error,
+            info: theme.info,
+            pointsLow: theme.pointsLow,
+            pointsMedium: theme.pointsMedium,
+            pointsHigh: theme.pointsHigh
+        )
+    }
+}
+
+struct AppColorsType {
+    let primary: Color
+    let secondary: Color
+    let accent: Color
+    let background: Color
+    let cardBackground: Color
+    let textPrimary: Color
+    let textSecondary: Color
+    let textLight: Color
+    let success: Color
+    let warning: Color
+    let error: Color
+    let info: Color
+    let pointsLow: Color
+    let pointsMedium: Color
+    let pointsHigh: Color
+}
+
+// MARK: - Environment Key
+struct ThemeKey: EnvironmentKey {
+    static let defaultValue: Theme = .light
+}
+
+extension EnvironmentValues {
+    var theme: Theme {
+        get { self[ThemeKey.self] }
+        set { self[ThemeKey.self] = newValue }
+    }
+}
+
 struct SharedWebView: UIViewRepresentable {
     let url: URL?
 
@@ -31,23 +196,28 @@ struct SharedWebView_Previews: PreviewProvider {
     }
 }
 
-// MARK: - App Colors
+// MARK: - App Colors (Dynamic Theme Support)
 struct AppColors {
-    static let primary = Color(hex: "FF6600")
-    static let secondary = Color(hex: "F6F6EF")
-    static let accent = Color(hex: "00D9FF")
-    static let background = Color(hex: "F8F9FA")
-    static let cardBackground = Color.white
-    static let textPrimary = Color(hex: "2D3436")
-    static let textSecondary = Color(hex: "636E72")
-    static let textLight = Color(hex: "B2BEC3")
-    static let success = Color(hex: "00B894")
-    static let warning = Color(hex: "FDCB6E")
-    static let error = Color(hex: "FF7675")
-    static let info = Color(hex: "74B9FF")
-    static let pointsLow = Color(hex: "95A5A6")
-    static let pointsMedium = Color(hex: "FF6600")
-    static let pointsHigh = Color(hex: "E74C3C")
+    private static var current: AppColorsType {
+        let theme = ThemeManager.shared.currentTheme
+        return AppColorsProvider.colors(for: theme)
+    }
+
+    static var primary: Color { current.primary }
+    static var secondary: Color { current.secondary }
+    static var accent: Color { current.accent }
+    static var background: Color { current.background }
+    static var cardBackground: Color { current.cardBackground }
+    static var textPrimary: Color { current.textPrimary }
+    static var textSecondary: Color { current.textSecondary }
+    static var textLight: Color { current.textLight }
+    static var success: Color { current.success }
+    static var warning: Color { current.warning }
+    static var error: Color { current.error }
+    static var info: Color { current.info }
+    static var pointsLow: Color { current.pointsLow }
+    static var pointsMedium: Color { current.pointsMedium }
+    static var pointsHigh: Color { current.pointsHigh }
 }
 
 extension Color {
@@ -88,9 +258,12 @@ struct RoundedCorner: Shape {
 
 struct NewsCard: View {
     let post: Post
+    @StateObject private var themeManager = ThemeManager.shared
+    @StateObject private var bookmarkManager = BookmarkManager.shared
 
     var body: some View {
-        HStack(spacing: 16) {
+        let _ = themeManager.isDarkMode // Force observation
+        return HStack(spacing: 16) {
             PointsBadge(points: post.points)
 
             VStack(alignment: .leading, spacing: 8) {
@@ -107,6 +280,17 @@ struct NewsCard: View {
                     }
 
                     Spacer()
+
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            bookmarkManager.toggleBookmark(post)
+                        }
+                    }) {
+                        Image(systemName: bookmarkManager.isBookmarked(post) ? "bookmark.fill" : "bookmark")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(bookmarkManager.isBookmarked(post) ? AppColors.primary : AppColors.textLight)
+                    }
+                    .buttonStyle(PlainButtonStyle())
 
                     Image(systemName: "chevron.right")
                         .font(.system(size: 12, weight: .semibold))
@@ -128,9 +312,11 @@ struct NewsCard: View {
 
 struct PointsBadge: View {
     let points: Int
+    @StateObject private var themeManager = ThemeManager.shared
 
     var body: some View {
-        VStack(spacing: 4) {
+        let _ = themeManager.isDarkMode // Force observation
+        return VStack(spacing: 4) {
             Text("\(points)")
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.white)
